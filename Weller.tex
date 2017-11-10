@@ -1,0 +1,49 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{times}
+\usepackage[authoryear]{natbib}
+
+\begin{document}
+ 
+\title{\vspace{-2cm}Proposal for an MPECDT MRes Project: \\
+Numerical Methods for Boundary Layer Coupling\vspace{-1.3cm}}
+\author{}
+\date{10 Nov 2017\vspace{-0.7cm}}
+\maketitle
+
+\thispagestyle{empty}
+
+\noindent
+\begin{tabular}{ll}
+\bf Student: & {\bf Ben Ashby} (University of Reading)\\
+\bf Supervisors: & {\bf Hilary Weller} (Reading Meteorology)\\
+            & {\bf Tristan Pryer} (Reading Mathematics)\\
+            & {\bf Peter Clark} (Reading Meteorology, to be confirmed)\\
+\end{tabular} \ \\
+
+\section*{MRes Motivation and Project Outline}
+
+Decades of work has gone into creating models of the atmosphere but this has been disjointed, with some groups working on accurate solutions of the equations of motion (the dynamics) and others working on processes not included in the equations of motion at the grid scale -- the physical parameterisations (the physics). Physical parameterisations are usually coupled to the dynamics explicitly, meaning that they can lead to numerical instability or oscillatory solutions. This project will focus on finding stable and accurate techniques for coupling a non-linear boundary layer parameterisation with the inviscid dynamics. 
+
+Boundary layer turbulence is usually parameterised by Reynolds averaging the equations of motion which leads to Reynolds stresses in the transport equations for mean values of velocity, moisture and temperature. The Reynolds stresses are often parameterised as diffusion terms with a diffusion coefficients that dependent on wind shear and stratification \cite[eg][]{HP96,LBB+00,SvH06}. The diffusion is a fast term and therefore, a linearised version is usually solved implicitly \cite[eg][]{KK88}. The diffusion coefficient is assumed to vary slowly and so is treated explicitly. This assumption can lead to numerical instability which motivated \cite{CS03,DWS06} to develop predictor--corrector approaches in order to update the non-linearities. 
+
+In this project, the student will develop Newton and quasi-Newton methods for solving the diffusive terms of the velocity and temperature equations implicitly. The student will consider horizontal velocity and work in one-dimension, assuming variation only in the vertical direction. Thus simple code can be written from scratch, enabling the student to understand every aspect of the numerical solution. Various linearisations of the diffusion term will be considered in order to find a stable, efficient and accurate solution of this non-linear problem. The new techniques will be compared with those of \cite{KK88,DWS06}. 
+
+The MRes project will not consider non-local boundary layer effects  \cite[eg][]{HP96}, interactions with atmospheric convection or higher-order turbulence closure. 
+
+\section*{Extension to PhD}
+
+Extension to a PhD could take a number of different routes:
+\begin{itemize}
+\item The numerical methods developed in 1D in the MRes project could be extended to three dimensions and implemented in the OpenFOAM PDEs solver. Comparisons would then be made with Met Office models. Extensions to three dimensions will include more coupling strategies because all of the terms of the momentum equation will be included so the boundary layer diffusion will also be interacting with fast waves and advection. 
+
+\item Higher-order turbulence closures for the atmospheric boundary layer with interactions with atmospheric convection are being developed by Peter Clark as as part of the NERC funded Paracon project. This uses volume averaging rather than Reynolds averaging. Numerical methods will be developed to solve these equations coupled with the dynamics. 
+
+\item Interactions between the boundary layer and atmospheric convection are crucially important for accurate weather and climate prediction. Reynolds or volume averaging will be combined with conditional averaging \cite[]{SST07,TWW+1x} in order to predict means and variations of temperature, moisture and heat both in cloudy updraft regions and in the convectively stable environment.
+\end{itemize}
+
+
+\bibliography{numerics}
+\bibliographystyle{abbrvnat}
+
+\end{document}
